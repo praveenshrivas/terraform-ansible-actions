@@ -1,0 +1,14 @@
+name: workflow2
+
+on: 
+  workflow_run:
+    workflows: ["Workflow1"]
+    types:
+      - completed
+
+jobs: 
+  second-job: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm Trigger 
+        run: echo "Workflow 2 ran automatically after Workflow 1 is completed!!!!"
