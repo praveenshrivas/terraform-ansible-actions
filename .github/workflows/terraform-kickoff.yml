@@ -1,0 +1,22 @@
+name: List S3 Buckets
+
+on: [push]
+
+jobs: 
+  list-buckets:
+    runs-on: ubuntu-latest
+    environment: dev # keep this if secrets are inside the dev environment only
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: List all S3 buckets
+        run: aws s3 ls
+
+
+          
+          
