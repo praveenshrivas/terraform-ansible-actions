@@ -1,0 +1,25 @@
+name: Simple Ansible Demo 
+
+on: [push]
+
+jobs:
+  run-ansible:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup to handhle SSH Key (Placeholder) 
+        run: |
+          echo "Pretending to setup SSH Key"
+          echo "We need to inject the pem key here..."
+
+      - name: Install Ansible 
+        run: |
+          sudo apt update -y
+          sudo apt install -y ansible
+
+      - name: Check Ansible Version
+        run: ansible --version
+        
