@@ -1,12 +1,20 @@
-name: List S3 Buckets
+name: Kick Off EC2 Instance.
 
 on: [push]
 
 jobs: 
-  list-buckets:
+  terraform-apply:
     runs-on: ubuntu-latest
     environment: dev # keep this if secrets are inside the dev environment only
     steps:
+      - name: Checkout repository 
+        uses: actions/checkout@v4
+
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.5
+          
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -14,8 +22,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
 
-      - name: List all S3 buckets
-        run: aws s3 ls
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Applu 
+        run: terraform apply -auto-approve
 
 
           
